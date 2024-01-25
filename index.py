@@ -25,7 +25,7 @@ if __name__ == "__main__":
     if mode == "dev":
         socketio.run(app, debug=True, host='0.0.0.0', port=5000)
     else:
-        serve(socketio, host="0.0.0.0", port=4020, threads=10)
+        serve(app, host="0.0.0.0", port=4020, threads=10)
         # socketio.run(app, debug=True, host='0.0.0.0', port=5000)
 
 
