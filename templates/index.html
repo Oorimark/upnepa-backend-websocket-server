@@ -12,7 +12,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script>
-        var socket = io.connect('ws://' + document.domain + ':' + location.port);
+        var socket = io.connect('https://' + document.domain + ':' + location.port);
 
         socket.on('message', function(msg) {
             var messagesDiv = document.getElementById('messages');
