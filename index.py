@@ -19,10 +19,6 @@ def handle_message(msg):
     socketio.emit('message', msg)
 
 
-if __name__ == '__main__':
-    socketio.run(app, debug=True, host='0.0.0.0', port=5000)
-
-
 mode = "prod"
 
 if __name__ == "__main__":
@@ -31,3 +27,7 @@ if __name__ == "__main__":
     else:
         serve(socketio, host="0.0.0.0", port=4020, threads=10)
         # socketio.run(app, debug=True, host='0.0.0.0', port=5000)
+
+
+# if __name__ == '__main__':
+#     socketio.run(app, debug=True, host='0.0.0.0', port=5000)
