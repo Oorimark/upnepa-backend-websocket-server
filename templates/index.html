@@ -14,6 +14,8 @@
     <script>
         var socket = io.connect('https://' + document.domain + ':' + location.port);
 
+        console.log('Connection Port: ', 'https://' + document.domain + ':' + location.port)
+
         socket.on('message', function(msg) {
             var messagesDiv = document.getElementById('messages');
             messagesDiv.innerHTML += '<p>' + msg + '</p>';
@@ -25,7 +27,7 @@
             socket.emit('message', message);
         }
 
-        setInterval(sendMessage, 1000)
+        // setInterval(sendMessage, 1000)
     </script>
 </body>
 </html>
