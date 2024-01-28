@@ -1,6 +1,10 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+from gevent import monkey
+from gevent.pywsgi import WSGIServer
 from waitress import serve
+
+monkey.patch_all()
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -22,11 +26,12 @@ def handle_message(msg):
 mode = "prod"
 
 if __name__ == "__main__":
-    if mode == "dev":
-        socketio.run(app, debug=True, host='0.0.0.0', port=5000)
-    else:
-        serve(app, host="0.0.0.0", port=4020, threads=10)
-        # socketio.run(app, debug=True, host='0.0.0.0', port=5000)
+    socketio.run(app, debug=True, host='0.0.0.0', port=5000)
+    # if mode == "dev":
+    #     socketio.run(app, debug=True, host='0.0.0.0', port=5000)
+    # else:
+    #     serve(app, host="0.0.0.0", port=4020, threads=10)
+    # socketio.run(app, debug=True, host='0.0.0.0', port=5000)
 
 
 # if __name__ == '__main__':
