@@ -12,10 +12,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script>
-        // var socket = io.connect('https://' + document.domain + ':' + location.port);
-        var socket = io.connect('http://localhost:5000');
+        var socket = io.connect('https://' + document.domain + ':' + 5000);
+        // var socket = io.connect('http://localhost:5000');
 
-        console.log('Connection Port: ', 'https://' + document.domain + ':' + location.port)
+
+        console.log('Connection Port: ', 'https://' + document.domain + ":5000")
 
         socket.on('message', function(msg) {
             var messagesDiv = document.getElementById('messages');
