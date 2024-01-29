@@ -1,20 +1,44 @@
-const express = require("express");
-const http = require("http");
-const socketIO = require("socket.io");
+import express from "express";
+import FileStorage from "./model.js";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import http from "http";
+import { Server } from "socket.io";
+import bodyParser from "body-parser";
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
+const fileStorage = new FileStorage();
+const io = new Server(server);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
+});
+
+app.post("/parameters", (req, res) => {
+  try {
+    io.emit("message", req.body);
+    fileStorage.saveData(req.body);
+  } catch (error) {
+    res
+      .status(404)
+      .json({ data: { err: "Problem inserting to file storage " + error } });
+    return;
+  }
+  res.status(200).json({ data: { res: "success" } });
 });
 
 io.on("connection", (socket) => {
   console.log("A user connected");
 
   socket.on("message", (msg) => {
-    console.log("Message received:", msg);
+    // console.log("Message received:", msg);
     // Broadcast the message to all connected clients
     io.emit("message", msg);
   });
