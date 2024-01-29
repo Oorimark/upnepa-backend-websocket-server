@@ -22,7 +22,7 @@
             if (typeof (msg) === "string")
                 messagesDiv.innerHTML += '<p>' + msg + '</p>';
             else {
-                const {voltage, current} = msg
+                const {voltage, current} = JSON.parse(msg)
                 messagesDiv.innerHTML += '<p>' + `Voltage: ${voltage}  | Current: ${current}` + '</p>';
             }
         });
