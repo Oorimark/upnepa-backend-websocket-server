@@ -24,10 +24,9 @@
             else {
                 console.log(typeof msg)
                 console.log(msg)
-                console.log(JSON.parse(msg))
-                // const {voltage, current} = JSON.parse(msg)
-                // messagesDiv.innerHTML += '<p>' + `Voltage: ${voltage}  | Current: ${current}` + '</p>';
-                messagesDiv.innerHTML += '<p>' + msg + '</p>';
+                const {voltage, current} = (msg)
+                messagesDiv.innerHTML += '<p>' + `Voltage: ${voltage}  | Current: ${current}` + '</p>';
+                // messagesDiv.innerHTML += '<p>' + msg + '</p>';
             }
         });
 
