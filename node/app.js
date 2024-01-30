@@ -22,7 +22,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/parameters", (req, res) => {
-  console.log(req.body);
   try {
     io.emit("message", req.body);
     fileStorage.saveData(req.body);
