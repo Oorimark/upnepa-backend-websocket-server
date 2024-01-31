@@ -57,6 +57,7 @@ io.on("connection", (socket) => {
   socket.on("message", (msg) => {
     // console.log("Message received:", msg);
     // Broadcast the message to all connected clients
+    if (!msg) msg = { voltage: 0, current: 0 };
     io.emit("message", msg);
   });
 
