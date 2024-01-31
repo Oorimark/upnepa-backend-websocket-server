@@ -24,18 +24,32 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.post("/parameters", (req, res) => {
-  try {
-    io.emit("message", req.body);
-    fileStorage.saveData(req.body);
-  } catch (error) {
-    res
-      .status(404)
-      .json({ data: { err: "Problem inserting to file storage " + error } });
-    return;
-  }
-  res.status(200).json({ data: { res: "success" } });
-});
+app
+  .route("/parameters")
+  .post((req, res) => {
+    try {
+      io.emit("message", req.body);
+      fileStorage.saveData(req.body);
+    } catch (error) {
+      res
+        .status(404)
+        .json({ data: { err: "Problem inserting to file storage " + error } });
+      return;
+    }
+    res.status(200).json({ data: { res: "success" } });
+  })
+  .get((req, res) => {
+    try {
+      res.status(200).json({ data: { res: fileStorage.fetch() } });
+    } catch (error) {
+      res
+        .status(404)
+        .json({ data: { err: "Problem fetching to file storage " + error } });
+      return;
+    }
+  });
+
+app.route("/parameter");
 
 io.on("connection", (socket) => {
   console.log("A user connected");
