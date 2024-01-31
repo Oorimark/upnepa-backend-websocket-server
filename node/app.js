@@ -8,13 +8,14 @@ import { Server } from "socket.io";
 import bodyParser from "body-parser";
 
 const app = express();
-const server = http.createServer(app);
-const fileStorage = new FileStorage();
-const io = new Server(server);
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const server = http.createServer(app);
+const fileStorage = new FileStorage();
+const io = new Server(server);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
