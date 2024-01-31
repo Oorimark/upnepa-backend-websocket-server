@@ -1,6 +1,7 @@
 import express from "express";
 import FileStorage from "./model.js";
 import { fileURLToPath } from "url";
+import cors from "cors";
 import { dirname } from "path";
 import http from "http";
 import { Server } from "socket.io";
@@ -11,6 +12,7 @@ const server = http.createServer(app);
 const fileStorage = new FileStorage();
 const io = new Server(server);
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
